@@ -9,12 +9,18 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 public class UserService {
 
     @Autowired
     private UserRepo userRepo;
+
+    public List<User> findAllUsers() {
+        return userRepo.findAll();
+    }
 
     public User addUser(UserDto userDto) {
         log.info("Adding User. User Name: {}", userDto.getName());
@@ -28,6 +34,10 @@ public class UserService {
                 user.getName());
 
         return user;
+    }
+
+    public void deleteUserById(Integer id) {
+        userRepo.deleteById(id);
     }
 
 }

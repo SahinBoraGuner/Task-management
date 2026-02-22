@@ -38,7 +38,7 @@ public class AdminService {
             task.setDescription(taskDto.getDescription());
             task.setDueDate(taskDto.getDueDate());
             task.setUser(foundUser);
-            task.setStatus(TaskStatus.READY);
+            task.setStatus(taskDto.getStatus());
             taskRepo.save(task);
 
         return task;

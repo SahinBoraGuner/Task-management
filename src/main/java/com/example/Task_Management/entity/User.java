@@ -10,19 +10,19 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "user")
+@Table(name = "users")
 public class User {
 
     @Id
-    @Column(name = "Id", length = 45)
+    @Column(name = "id", length = 45)
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 
-    @Column(name = "Name", length = 100, nullable = false)
+    @Column(name = "name", length = 100, nullable = false)
     private String name;
 
-    @Column(name = "user_type")
+    @Column(name = "user_type", length = 20)
     @Enumerated(EnumType.STRING)
-    private UserType userType = UserType.USER;
+    private UserType userType;
 
 }

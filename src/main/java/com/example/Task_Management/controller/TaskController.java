@@ -23,12 +23,26 @@ public class TaskController {
     }
 
     @GetMapping("/all")
-    public List<Task> getAllTasks() {
+    public List<TaskDto> getAllTasks() {
+        List<Task> allTasks = taskService.findAllTasks();
+        List<TaskDto> taskDtos = allTasks.stream()
+                .map(task -> {
+                    TaskDto taskDto  = new TaskDto();
+                    taskDto.setId(task.getId());
+                    taskDto.setTitle(task.getTitle());
+                    taskDto.setDescription(task.getDescription());
+                    taskDto.setDueDate(task.getDueDate());
+                    taskDto.setStatus(task.getStatus());
+                    taskDto.setUserId(task.getUser().getId());
+                    taskDto.setUserName(task.getUser().getName());
+                    return taskDto;
+                })
+                .toList();
 
-        return taskService.findAllTasks();
+        return taskDtos;
     }
 
-    @PostMapping("/add")
+    @PostMapping(path = "/add")
     public Task addTask(@RequestBody TaskDto taskDto) {
         return taskService.addTask(taskDto);
     }
@@ -36,5 +50,10 @@ public class TaskController {
     @DeleteMapping("/delete/{id}")
     public void deleteTaskById(@PathVariable("id") Integer id) {
         taskService.deleteTaskById(id);
+    }
+
+    @PostMapping("/update")
+    public Task updateTask(@RequestBody TaskDto taskDto) {
+        return taskService.updateTask(taskDto);
     }
 }

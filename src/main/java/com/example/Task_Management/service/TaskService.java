@@ -4,7 +4,9 @@ package com.example.Task_Management.service;
 import com.example.Task_Management.dto.TaskDto;
 import com.example.Task_Management.entity.Task;
 import com.example.Task_Management.entity.TaskStatus;
+import com.example.Task_Management.entity.User;
 import com.example.Task_Management.repository.TaskRepo;
+import com.example.Task_Management.repository.UserRepo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,6 +20,9 @@ public class TaskService {
 
     @Autowired
     private TaskRepo taskRepo;
+
+    @Autowired
+    private UserRepo userRepo;
 
     public Task findTaskById(Integer id) {
         Task task = taskRepo.findById(id)
@@ -34,12 +39,14 @@ public class TaskService {
 
     public Task addTask(TaskDto taskDto) {
         log.info("Adding task. Task Title: {}", taskDto.getTitle());
+        User newUser = userRepo.findById(taskDto.getUserId());
 
         Task task = new Task();
         task.setTitle(taskDto.getTitle());
         task.setDescription(taskDto.getDescription());
         task.setDueDate(taskDto.getDueDate());
         task.setStatus(taskDto.getStatus());
+        task.setUser(newUser);
         taskRepo.save(task);
 
         log.info("Added task successfully. Task Title: {}",
@@ -57,13 +64,16 @@ public class TaskService {
     public Task updateTask(TaskDto taskDto) {
 
         log.info("Updating task. Task Title: {}", taskDto.getTitle());
-
         Task task = taskRepo.findById(taskDto.getId());
-        task.setTitle(taskDto.getTitle());
-        task.setDescription(taskDto.getDescription());
-        task.setDueDate(taskDto.getDueDate());
-        task.setStatus(taskDto.getStatus());
-        taskRepo.save(task);
+
+        if (task != null) {
+            task.setTitle(taskDto.getTitle());
+            task.setDescription(taskDto.getDescription());
+            task.setDueDate(taskDto.getDueDate());
+            task.setStatus(taskDto.getStatus());
+            taskRepo.save(task);
+
+        }
 
         log.info("Updated task successfully. Task Title: {}",
                 task.getTitle());

@@ -1,7 +1,6 @@
 package com.example.Task_Management.entity;
 
 
-import com.example.Task_Management.dto.TaskDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +12,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "task")
+@Table(name = "taskTab")
 public class Task {
 
     @Id
@@ -24,13 +23,13 @@ public class Task {
     @Column(name = "title", length = 100, nullable = false)
     private String title;
 
-    @Column(name = "description", length = 8, nullable = false)
+    @Column(name = "description", length = 20, nullable = false)
     private String description;
 
-    @Column(name = "dueDate", length = 8, nullable = false)
+    @Column(name = "dueDate", length = 20, nullable = false)
     private Date dueDate;
 
-    @Column(name = "status", length = 8, nullable = false)
+    @Column(name = "status", length = 20, nullable = false)
     private TaskStatus status;
 
     @ManyToOne
