@@ -18,7 +18,7 @@ public class AdminController {
     private AdminService adminService;
 
 
-    @PostMapping
+    @PostMapping("/add")
     public Task createTask(@RequestBody TaskDto taskDto) {
         return  adminService.createTask(taskDto);
 
