@@ -21,6 +21,9 @@ public class User {
     @Column(name = "name", length = 100, nullable = false)
     private String name;
 
+    @Column(name = "email", length = 100, nullable = false)
+    private String email;
+
     @Column(name = "user_type", length = 20)
     @Enumerated(EnumType.STRING)
     private UserType userType;

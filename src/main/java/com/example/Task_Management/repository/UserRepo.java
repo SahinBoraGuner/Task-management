@@ -10,8 +10,6 @@ public interface UserRepo extends JpaRepository<User, Integer> {
 
     User findById(int id);
 
-    List<User> findByNameStartingWith(String name);
-
     @Query("select u from User u where lower(u.name) like lower(:name)")
     List<User> findUsers(String name);
 

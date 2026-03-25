@@ -22,6 +22,16 @@ public class TaskController {
         return taskService.findTaskById(id);
     }
 
+    @GetMapping("/search")
+    public List<Task> findAllTasksByDescription(@RequestParam String description) {
+        return taskService.findAllTasksByDescription(description);
+    }
+
+    @GetMapping("/searched")
+    public List<Task> findAllTasksByTitle(@RequestParam String title) {
+        return taskService.findAllTasksByTitle(title);
+    }
+
     @GetMapping("/all")
     public List<TaskDto> getAllTasks() {
         List<Task> allTasks = taskService.findAllTasks();

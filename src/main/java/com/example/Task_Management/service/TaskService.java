@@ -37,6 +37,14 @@ public class TaskService {
         return taskRepo.findAll();
     }
 
+    public List<Task> findAllTasksByDescription(String description) {
+        return taskRepo.findTaskByDescription( description + '%');
+    }
+
+    public List<Task> findAllTasksByTitle(String title) {
+        return taskRepo.findTaskByTitle(title + '%');
+    }
+
     public Task addTask(TaskDto taskDto) {
         log.info("Adding task. Task Title: {}", taskDto.getTitle());
         User newUser = userRepo.findById(taskDto.getUserId());

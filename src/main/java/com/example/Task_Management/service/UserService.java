@@ -26,10 +26,12 @@ public class UserService {
     }
 
     public List<User> findAllUsersByName(String name) {
-        return userRepo.findUsers( name + '%');
 
+        return userRepo.findUsers( name + '%');
     }
+
     public List<User> findUsersByName(UserSearchDto userSearchDto) {
+
         log.info("Finding Users. User Name: {}", userSearchDto.getName());
         List<User> user = userRepo.findUsers(userSearchDto.getName() + '%');
         if (user == null) {
@@ -45,6 +47,7 @@ public class UserService {
 
         User user = new User();
         user.setName(userDto.getName());
+        user.setEmail(userDto.getEmail());
         user.setUserType(userDto.getUserType());
         userRepo.save(user);
 
