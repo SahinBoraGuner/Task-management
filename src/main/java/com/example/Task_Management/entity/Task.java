@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.Instant;
 import java.util.Date;
 
 @Data
@@ -36,6 +37,7 @@ public class Task {
     @JoinColumn(name = "user_id")
     private User user;
 
-
+    @Column(name = "overdueNotifiedAt")
+    private Instant overdueNotifiedAt;
 
 }

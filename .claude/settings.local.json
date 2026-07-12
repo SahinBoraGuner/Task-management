@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(openspec new *)",
+      "Bash(openspec status *)",
+      "Bash(openspec instructions *)",
+      "Bash(xargs -I{} echo {})",
+      "Bash(git stash *)",
+      "Bash(./mvnw.cmd -q -o compile)",
+      "Bash(echo \"EXIT:$?\")"
+    ]
+  }
+}

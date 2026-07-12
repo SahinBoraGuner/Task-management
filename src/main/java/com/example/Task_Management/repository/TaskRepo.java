@@ -15,4 +15,9 @@ public interface TaskRepo extends JpaRepository<Task, Integer> {
 
     @Query("select u from Task u where lower(u.description) like lower(:description)")
     List<Task> findTaskByDescription(String description);
+
+    @Query("select t from Task t where t.dueDate < CURRENT_TIMESTAMP " +
+            "and t.status not in (com.example.Task_Management.entity.TaskStatus.COMPLETED, com.example.Task_Management.entity.TaskStatus.CANCELLED) " +
+            "and t.overdueNotifiedAt is null")
+    List<Task> findOverdueUnnotifiedTasks();
 }
