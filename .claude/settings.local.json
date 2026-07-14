@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mvn -version)",
+      "Bash(mvn -q -o compile)",
+      "Bash(timeout 60 mvn -q compile)"
+    ]
+  }
+}

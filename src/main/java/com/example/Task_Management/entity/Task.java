@@ -32,6 +32,9 @@ public class Task {
     @Column(name = "status", length = 20, nullable = false)
     private TaskStatus status;
 
+    @Column(name = "overdueNotifiedAt", nullable = true)
+    private Date overdueNotifiedAt;
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;

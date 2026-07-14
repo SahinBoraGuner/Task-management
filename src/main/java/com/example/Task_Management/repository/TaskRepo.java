@@ -1,9 +1,11 @@
 package com.example.Task_Management.repository;
 
 import com.example.Task_Management.entity.Task;
+import com.example.Task_Management.entity.TaskStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.Date;
 import java.util.List;
 
 public interface TaskRepo extends JpaRepository<Task, Integer> {
@@ -15,4 +17,7 @@ public interface TaskRepo extends JpaRepository<Task, Integer> {
 
     @Query("select u from Task u where lower(u.description) like lower(:description)")
     List<Task> findTaskByDescription(String description);
+
+    @Query("select t from Task t where t.dueDate < :now and t.status not in :excludedStatuses and t.overdueNotifiedAt is null")
+    List<Task> findOverdueTasks(Date now, List<TaskStatus> excludedStatuses);
 }
